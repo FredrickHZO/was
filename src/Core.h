@@ -43,14 +43,17 @@ bool SystemShutDown() {
 	return true;
 }
 
-// checks if the shut down sequence should start, if so, calls SystemShutDown()
+// checks if the shut down sequence should start, if so, calls SystemShutDown
+// at the moment the return value of SSD is discarded, will fix later
 void ShutDownCheck() {
-	if (myTime->isTimeConfirmed() == true) {
-		GetLocalTime(&local);
-		if (myTime->getHours() == local.wHour
-			&& myTime->getMinutes() == local.wMinute) {
+	if (!myTime->isTimeConfirmed()) {
+		return 
+	}
+
+	GetLocalTime(&local);
+	if (myTime->getHours() == local.wHour && 
+		myTime->getMinutes() == local.wMinute) {
 			SystemShutDown();
-		}
 	}
 }
 

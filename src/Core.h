@@ -12,8 +12,6 @@
 SYSTEMTIME local;
 HWND hHours;
 HWND hMinute;
-HWND hHoursCombBox;
-HWND hMinutesCombBox;
 HWND confirm;
 Time* myTime = new Time();
 
@@ -57,7 +55,7 @@ void ShutDownCheck() {
 	}
 }
 
-void PopulateCombobox() {
+void PopulateCombobox(HWND hHoursCombBox, HWND hMinutesCombBox) {
 	for (int i = 0; i < 24; i++) {
 		std::string hour = std::to_string(i);
 		if (i < 10) {
@@ -82,15 +80,15 @@ void PopulateCombobox() {
 LRESULT CALLBACK WindowProc(HWND hWnd, UINT msg, WPARAM wp, LPARAM lp) {
 	switch (msg) {
 	case WM_CREATE: {
-		hHoursCombBox = CreateWindow(L"COMBOBOX", NULL,
+		HWND hHoursCombBox = CreateWindow(L"COMBOBOX", NULL,
 			WS_CHILD | WS_VISIBLE | CBS_DROPDOWNLIST | WS_VSCROLL,
 			30, 50, 100, 200, hWnd, (HMENU)ID_TEXT_HOURS, NULL, NULL);
 
-		hMinutesCombBox = CreateWindow(L"COMBOBOX", NULL,
+		HWND hMinutesCombBox = CreateWindow(L"COMBOBOX", NULL,
 			WS_CHILD | WS_VISIBLE | CBS_DROPDOWNLIST | WS_VSCROLL,
 			30, 100, 100, 200, hWnd, (HMENU)ID_TEXT_MINUTES, NULL, NULL);
 
-		PopulateCombobox();
+		PopulateCombobox(hHoursCombBox, hMinutesCombBox);
 
 		// confirmation buttons
 		HWND hours = CreateWindow(L"Button", L"Confirm hours",

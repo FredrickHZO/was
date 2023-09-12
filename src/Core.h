@@ -144,9 +144,9 @@ LRESULT CALLBACK WindowProc(HWND hWnd, UINT msg, WPARAM wp, LPARAM lp) {
 		}
 
 		case ID_BUTTON_CONFIRM: {
-			myTime->confirmTime();
 			std::string hours = std::to_string(myTime->getHours());
 			std::string minutes = std::to_string(myTime->getMinutes());
+	
 			if (myTime->getHours() < 10) hours = "0" + hours;
 			if (myTime->getMinutes() < 10) minutes = "0" + minutes;
 
@@ -155,6 +155,8 @@ LRESULT CALLBACK WindowProc(HWND hWnd, UINT msg, WPARAM wp, LPARAM lp) {
 
 			std::wstring tmp = std::wstring(str.begin(), str.end());
 			::MessageBox(hWnd, (LPCWSTR)tmp.c_str(), L"Confirm", MB_OK);
+
+			myTime->confirmTime();
 			return 0;
 		}
 

@@ -33,11 +33,10 @@ Window::~Window() {
 	UnregisterClass(CLASS_NAME, _hInstance);
 }
 
+// processes and dispatches events and messages to WindowProc function
 void Window::ProcessMessages() {
 	MSG msg = {};
-
-	// I didn't figure out how to run the shutdown logic wether the
-	// window is minimized or not without duplicating code
+	// TODO: see if it is avoidable to call ShutDownCheck twice
 	while (true) {
 		while (PeekMessage(&msg, nullptr, 0, 0, PM_REMOVE)) {
 			ShutDownCheck();

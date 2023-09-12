@@ -1,6 +1,5 @@
 #include <Windows.h>
 #include "Window.h"
-#include "Time.h"
 
 int WINAPI wWinMain(HINSTANCE hInst,
         HINSTANCE hPrevInst,

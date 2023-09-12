@@ -54,5 +54,4 @@ void Window::ProcessMessages() {
 	}
 }
 
-HINSTANCE Window::getInstance() { return _hInstance; }
 HWND Window::getHandle() { return _hWnd; }

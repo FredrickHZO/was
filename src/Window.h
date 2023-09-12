@@ -12,9 +12,6 @@ public:
 	HWND getHandle();
 
 private:
-	HINSTANCE getInstance();
-
-private:
 	HINSTANCE _hInstance;
 	HWND _hWnd;
 };

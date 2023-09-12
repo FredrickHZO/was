@@ -10,9 +10,6 @@
 #define ID_TEXT_MINUTES 5
 
 SYSTEMTIME local;
-HWND hHours;
-HWND hMinute;
-HWND confirm;
 Time* myTime = new Time();
 
 bool CustomSystemShutDown() {
@@ -101,7 +98,7 @@ LRESULT CALLBACK WindowProc(HWND hWnd, UINT msg, WPARAM wp, LPARAM lp) {
 			150, 100,
 			120, 30,
 			hWnd, (HMENU)ID_BUTTON_MINUTES, NULL, NULL);
-		confirm = CreateWindow(L"Button", L"Confirm time",
+		HWND confirm = CreateWindow(L"Button", L"Confirm time",
 			WS_VISIBLE | WS_CHILD | WS_BORDER,
 			90, 150,
 			120, 30,
@@ -123,6 +120,7 @@ LRESULT CALLBACK WindowProc(HWND hWnd, UINT msg, WPARAM wp, LPARAM lp) {
 			myTime->confirmHours();
 
 			if (myTime->areMinConfirmed()) {
+				HWND confirm = GetDlgItem(hWnd, ID_BUTTON_CONFIRM);
 				EnableWindow(confirm, TRUE);
 			}
 
@@ -138,6 +136,7 @@ LRESULT CALLBACK WindowProc(HWND hWnd, UINT msg, WPARAM wp, LPARAM lp) {
 			myTime->confirmMinutes();
 
 			if (myTime->areHoursConfirmed()) {
+				HWND confirm = GetDlgItem(hWnd, ID_BUTTON_CONFIRM);
 				EnableWindow(confirm, TRUE);
 			}
 

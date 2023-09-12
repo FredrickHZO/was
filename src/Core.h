@@ -1,6 +1,5 @@
 #pragma once
 #include <string>
-#include "Core.h"
 #include "Time.h"
 
 #define ID_BUTTON_HOURS 1

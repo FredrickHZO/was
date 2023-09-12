@@ -16,7 +16,7 @@ bool CustomSystemShutDown() {
 	HANDLE hToken;
 	TOKEN_PRIVILEGES tkp;
 
-	if (!OpenProcessToken(GetCurrentProcess(),
+	if (!::OpenProcessToken(GetCurrentProcess(),
 		TOKEN_ADJUST_PRIVILEGES | TOKEN_QUERY, &hToken)) {
 		return false;
 	}
@@ -30,11 +30,11 @@ bool CustomSystemShutDown() {
 	::AdjustTokenPrivileges(hToken, FALSE, &tkp, 0,
 		(PTOKEN_PRIVILEGES)NULL, 0);
 
-	if (GetLastError() != ERROR_SUCCESS) {
+	if (::GetLastError() != ERROR_SUCCESS) {
 		return false;
 	}
 
-	if (!ExitWindowsEx(EWX_SHUTDOWN | EWX_FORCE,
+	if (!::ExitWindowsEx(EWX_SHUTDOWN | EWX_FORCE,
 		SHTDN_REASON_FLAG_PLANNED)) {
 		return false;
 	}
@@ -120,7 +120,7 @@ LRESULT CALLBACK WindowProc(HWND hWnd, UINT msg, WPARAM wp, LPARAM lp) {
 			myTime->confirmHours();
 
 			if (myTime->areMinConfirmed()) {
-				HWND confirm = GetDlgItem(hWnd, ID_BUTTON_CONFIRM);
+				HWND confirm = ::GetDlgItem(hWnd, ID_BUTTON_CONFIRM);
 				::EnableWindow(confirm, TRUE);
 			}
 
@@ -136,7 +136,7 @@ LRESULT CALLBACK WindowProc(HWND hWnd, UINT msg, WPARAM wp, LPARAM lp) {
 			myTime->confirmMinutes();
 
 			if (myTime->areHoursConfirmed()) {
-				HWND confirm = GetDlgItem(hWnd, ID_BUTTON_CONFIRM);
+				HWND confirm = ::GetDlgItem(hWnd, ID_BUTTON_CONFIRM);
 				::EnableWindow(confirm, TRUE);
 			}
 

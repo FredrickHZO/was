@@ -12,6 +12,7 @@
 SYSTEMTIME local;
 Time* myTime = new Time();
 
+// ajusts needed privileges and shuts down Windows
 bool SystemShutDown() {
 	HANDLE hToken;
 	TOKEN_PRIVILEGES tkp;
@@ -42,6 +43,7 @@ bool SystemShutDown() {
 	return true;
 }
 
+// checks if the shut down sequence should start, if so, calls SystemShutDown()
 void ShutDownCheck() {
 	if (myTime->isTimeConfirmed() == true) {
 		GetLocalTime(&local);
@@ -52,6 +54,7 @@ void ShutDownCheck() {
 	}
 }
 
+// inserts hours and minutes values in the respective comboboxes
 void PopulateCombobox(HWND hHoursCombBox, HWND hMinutesCombBox) {
 	for (int i = 0; i < 24; i++) {
 		std::string hour = std::to_string(i);
@@ -74,6 +77,7 @@ void PopulateCombobox(HWND hHoursCombBox, HWND hMinutesCombBox) {
 	}
 }
 
+// handles messages and events for the main window and all of its children 
 LRESULT CALLBACK WindowProc(HWND hWnd, UINT msg, WPARAM wp, LPARAM lp) {
 	switch (msg) {
 	case WM_CREATE: {
